@@ -1,45 +1,40 @@
 import time
 import pytest
 from selenium.webdriver.common.by import By
-from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions
 from Locators import TestLocators
+from tests.conftest import driver
 
-def test_login_account_main():
-    driver = webdriver.Chrome()
-    driver.get("https://stellarburgers.nomoreparties.site/")
+
+main_url = "https://stellarburgers.nomoreparties.site/"
+log_url = "https://stellarburgers.nomoreparties.site/login"
+
+def test_login_account_main(driver):
+    driver.get(main_url)
     driver.find_element(*TestLocators.BUTTON_CHANGE).click()
-    time.sleep(1)
-    assert driver.current_url == 'https://stellarburgers.nomoreparties.site/login'
-    driver.quit()
+    WebDriverWait(driver, 3).until(expected_conditions.element_to_be_clickable((By.TAG_NAME, "button")))
+    assert driver.current_url == log_url
 
-def test_login_from_lc_button():
-    driver = webdriver.Chrome()
-    driver.get("https://stellarburgers.nomoreparties.site/")
+def test_login_from_lc_button(driver):
+    driver.get(main_url)
     driver.find_element(*TestLocators.BUTTON_LC).click()
-    time.sleep(1)
-    assert driver.current_url == 'https://stellarburgers.nomoreparties.site/login'
-    driver.quit()
+    WebDriverWait(driver, 3).until(expected_conditions.element_to_be_clickable((By.TAG_NAME, "button")))
+    assert driver.current_url == log_url
 
-def test_login_from_reg_form_button():
-    driver = webdriver.Chrome()
-    driver.get("https://stellarburgers.nomoreparties.site/")
+def test_login_from_reg_form_button(driver):
+    driver.get(main_url)
     driver.find_element(*TestLocators.BUTTON_LC).click()
-    time.sleep(1)
+    WebDriverWait(driver, 3).until(expected_conditions.element_to_be_clickable((By.TAG_NAME, "button")))
     driver.find_element(*TestLocators.REG_BUTTON).click()
-    time.sleep(1)
     driver.find_element(*TestLocators.ENTER_BUTTON).click()
-    time.sleep(1)
-    assert driver.current_url == "https://stellarburgers.nomoreparties.site/login"
-    driver.quit()
+    assert driver.current_url == log_url
 
-def test_login_from_recovery_form_button():
-    driver = webdriver.Chrome()
-    driver.get("https://stellarburgers.nomoreparties.site/")
+def test_login_from_recovery_form_button(driver):
+    driver.get(main_url)
     driver.find_element(*TestLocators.BUTTON_LC).click()
-    time.sleep(1)
+    WebDriverWait(driver, 3).until(expected_conditions.element_to_be_clickable((By.TAG_NAME, "button")))
     driver.find_element(*TestLocators.PWD_FGT_BUTTON).click()
-    time.sleep(1)
     driver.find_element(*TestLocators.ENTER_BUTTON).click()
-    time.sleep(1)
-    assert driver.current_url == "https://stellarburgers.nomoreparties.site/login"
-    driver.quit()
+    assert driver.current_url == log_url
+

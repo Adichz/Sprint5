@@ -24,3 +24,4 @@ class TestLocators:
     ENTER_BUTTON = [By.XPATH, ".//*[@href='/login']"]# Кнопка Войти
     CURRENT_ELEMENT = [By.XPATH, ".//*[contains(@class, 'current')]"]# Выбранный элемент
 
+
